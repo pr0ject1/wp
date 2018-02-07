@@ -1,22 +1,42 @@
-## ## wp-admin/.htaccess ## ##
 
-## PASSWORD PROTECT WP-ADMIN FOLDER##
+
+
+## ## /public_html/wp-admin/.htaccess ## ##
+
+## PASSWORD PROTECT WP-ADMIN FOLDER ##
 ## Put to wp-admin/.htaccess and uncomment to use ##
-## AuthType Basic ##
-## AuthName "can u dig it" ##
-## AuthUserFile "/home/.htpasswds/" ##
-## require valid-user ##
-## END PASSWORD PROTECT WP-ADMIN FOLDER##
+
+## UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
+# ErrorDocument 401 "Denied" 
+# ErrorDocument 403 "Denied" 
+# END UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
+
+## Allow plugin access to admin-ajax.php around password protection ## 
+# Order allow,deny
+# Allow from all
+# Satisfy any
+## Allow plugin access to admin-ajax.php around password protection ## 
+
+# AuthType Basic 
+# AuthName "can u dig it" 
+# AuthUserFile "/home/.htpasswds/"
+# require valid-user 
+## END PASSWORD PROTECT WP-ADMIN FOLDER ##
 
 
 
-## ## .htaccess ## ##
+
+## ## /public_html/.htaccess ## ##
 
 ## DISABLE DIRECTORY BROWSING ##
 Options All -Indexes
 ## END DISABLE DIRECTORY BROWSING ##
 
-## PASSWORD PROTECT wp-login.php##
+## PASSWORD PROTECT wp-login.php ##
+## UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
+# ErrorDocument 401 "Denied" 
+# ErrorDocument 403 "Denied" 
+## END UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
 <FilesMatch "wp-login.php">
 AuthType Basic
 AuthName "can u dig it"
