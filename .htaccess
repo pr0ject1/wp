@@ -1,6 +1,29 @@
+## ## wp-admin/.htaccess ## ##
+
+## PASSWORD PROTECT WP-ADMIN FOLDER##
+## Put to wp-admin/.htaccess and uncomment TO WSE ##
+## AuthType Basic ##
+## AuthName "can u dig it" ##
+## AuthUserFile "/home/.htpasswds/" ##
+## require valid-user ##
+## END PASSWORD PROTECT WP-ADMIN FOLDER##
+
+
+
+## ## .htaccess ## ##
+
 ## DISABLE DIRECTORY BROWSING ##
 Options All -Indexes
-## DISABLE DIRECTORY BROWSING ##
+## END DISABLE DIRECTORY BROWSING ##
+
+## PASSWORD PROTECT wp-login.php##
+<FilesMatch "wp-login.php">
+AuthType Basic
+AuthName "can u dig it"
+AuthUserFile "/home/path/to/.htpasswds"
+require valid-user
+</FilesMatch>
+## END PASSWORD PROTECT wp-login.php##
 
 ## EXPIRES CACHING ##
 <IfModule mod_expires.c>
@@ -16,7 +39,7 @@ ExpiresByType application/x-shockwave-flash "access plus 1 month"
 ExpiresByType image/x-icon "access plus 1 year"
 ExpiresDefault "access plus 2 days"
 </IfModule>
-## EXPIRES CACHING ##
+## END EXPIRES CACHING ##
 
 ## COMPRESS HTML, CSS, JAVASCRIPT, TEXT, XML AND FONTS ##
 <IfModule mod_deflate.c>
@@ -48,4 +71,4 @@ BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
 Header append Vary User-Agent
 ## Remove browser bugs (only needed for really old browsers) ##
 </IfModule>
-## COMPRESS HTML, CSS, JAVASCRIPT, TEXT, XML AND FONTS ##
+## END COMPRESS HTML, CSS, JAVASCRIPT, TEXT, XML AND FONTS ##
