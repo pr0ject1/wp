@@ -1,13 +1,12 @@
 ## ## wp-admin/.htaccess ## ##
 
 ## PASSWORD PROTECT WP-ADMIN FOLDER##
-## Put to wp-admin/.htaccess and uncomment TO WSE ##
+## Put to wp-admin/.htaccess and uncomment to use ##
 ## AuthType Basic ##
 ## AuthName "can u dig it" ##
 ## AuthUserFile "/home/.htpasswds/" ##
 ## require valid-user ##
 ## END PASSWORD PROTECT WP-ADMIN FOLDER##
-
 
 
 
