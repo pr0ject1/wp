@@ -1,3 +1,7 @@
+## DISABLE DIRECTORY BROWSING ##
+Options All -Indexes
+## DISABLE DIRECTORY BROWSING ##
+
 ## EXPIRES CACHING ##
 <IfModule mod_expires.c>
 ExpiresActive On
