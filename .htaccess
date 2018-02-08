@@ -45,6 +45,13 @@ require valid-user
 </FilesMatch>
 ## END PASSWORD PROTECT wp-login.php##
 
+## PROTECT wp-config.php ##
+<FilesMatch "wp-config.php">
+order allow,deny
+deny from all
+</FilesMatch>
+## END PROTECT wp-config.php ##
+
 ## EXPIRES CACHING ##
 <IfModule mod_expires.c>
 ExpiresActive On
