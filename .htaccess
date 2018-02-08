@@ -45,12 +45,12 @@ require valid-user
 </FilesMatch>
 ## END PASSWORD PROTECT wp-login.php##
 
-## PROTECT wp-config.php ##
-<FilesMatch "wp-config.php">
+## PROTECT wp-config.php | BLOCK xmlrpc.php REQUESTS ##
+<FilesMatch "^(wp-config|xmlrpc)\.php$">
 order allow,deny
 deny from all
 </FilesMatch>
-## END PROTECT wp-config.php ##
+## END PROTECT wp-config.php | BLOCK xmlrpc.php REQUESTS ##
 
 ## EXPIRES CACHING ##
 <IfModule mod_expires.c>
