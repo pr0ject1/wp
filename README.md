@@ -1,2 +1,2 @@
 # wp
-test project
+Useful WordPress stuff
