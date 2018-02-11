@@ -4,7 +4,6 @@
 ## ## /public_html/wp-admin/.htaccess ## ##
 
 ## PASSWORD PROTECT WP-ADMIN FOLDER ##
-## Put to /public_html/wp-admin/.htaccess ##
 
 ## UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
 # ErrorDocument 401 "Denied" 
@@ -26,7 +25,18 @@ AuthUserFile "/home/.htpasswds/"
 ## Use only one, valid user or exact user name ##
 require valid-user 
 # require user myusername
+
 ## END PASSWORD PROTECT WP-ADMIN FOLDER ##
+
+## ALLOW ONLY SPECIFIED IP ADDRESSES (Change IP to your provider range) ##
+Order Deny,Allow
+Deny from all
+# Allow from 141.0.0.0/8
+Allow from 141.136.0.0/16
+Allow from 141.138.0.0/16
+Allow from 89.164.0.0/16
+Allow from 213.202.69.0/24
+## END ALLOW ONLY SPECIFIED IP ADDRESSES ##
 
 
 
@@ -40,19 +50,24 @@ Options All -Indexes
 
 
 ## PASSWORD PROTECT wp-login.php ##
+
 ## UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
 # ErrorDocument 401 "Denied" 
 # ErrorDocument 403 "Denied" 
 ## END UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
+
 <FilesMatch "wp-login.php">
 AuthType Basic
 AuthName "can u dig it"
-## Don't forget to  change your path to auth user file ##
-AuthUserFile "/home/path/to/.htpasswds" 
+
+## Don't forget to change your path to auth user file ##
+AuthUserFile "/home/path/to/.htpasswds"
+
 ## Use valid user or exact user name ##
 require valid-user 
 # require user myusername
 </FilesMatch>
+
 ## END PASSWORD PROTECT wp-login.php ##
 
 
