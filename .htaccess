@@ -4,7 +4,7 @@
 ## ## /public_html/wp-admin/.htaccess ## ##
 
 ## PASSWORD PROTECT WP-ADMIN FOLDER ##
-## Put to /public_html/wp-admin/.htaccess and uncomment to use ##
+## Put to /public_html/wp-admin/.htaccess ##
 
 ## UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
 # ErrorDocument 401 "Denied" 
@@ -19,11 +19,13 @@
 #</Files>
 ## END UNCOMMENT TO ALLOW PLUGIN ACCESS TO admin-ajax.php ## 
 
-# AuthType Basic 
-# AuthName "can u dig it"
+AuthType Basic 
+AuthName "can u dig it"
 ## Don't forget to change your path ##
-# AuthUserFile "/home/.htpasswds/"
-# require valid-user 
+AuthUserFile "/home/.htpasswds/"
+## Use only one, valid user or exact user name ##
+require valid-user 
+# require user myusername
 ## END PASSWORD PROTECT WP-ADMIN FOLDER ##
 
 
@@ -31,9 +33,11 @@
 
 ## ## /public_html/.htaccess ## ##
 
+
 ## DISABLE DIRECTORY BROWSING ##
 Options All -Indexes
 ## END DISABLE DIRECTORY BROWSING ##
+
 
 ## PASSWORD PROTECT wp-login.php ##
 ## UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
@@ -51,12 +55,27 @@ require valid-user
 </FilesMatch>
 ## END PASSWORD PROTECT wp-login.php ##
 
+
 ## PROTECT wp-config.php | BLOCK xmlrpc.php REQUESTS ##
 <FilesMatch "^(wp-config|xmlrpc)\.php$">
 order allow,deny
 deny from all
 </FilesMatch>
 ## END PROTECT wp-config.php | BLOCK xmlrpc.php REQUESTS ##
+
+
+## Deny Access to No Referrer Requests - Stop spam attack logins and comments ##
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} POST
+RewriteCond %{REQUEST_URI} .*/(wp-comments-post|wp-login)\.php.*
+## Change example.com to your domain ## 
+RewriteCond %{HTTP_REFERER} !.*example.com.* [OR]
+RewriteCond %{HTTP_USER_AGENT} ^$
+RewriteRule (.*) http://%{REMOTE_ADDR}/$1 [R=301,L]
+</ifModule>
+## END Deny Access to No Referrer Requests - Stop spam attack logins and comments ##
+
 
 ## EXPIRES CACHING ##
 <IfModule mod_expires.c>
@@ -73,6 +92,7 @@ ExpiresByType image/x-icon "access plus 1 year"
 ExpiresDefault "access plus 2 days"
 </IfModule>
 ## END EXPIRES CACHING ##
+
 
 ## COMPRESS HTML, CSS, JAVASCRIPT, TEXT, XML AND FONTS ##
 <IfModule mod_deflate.c>
