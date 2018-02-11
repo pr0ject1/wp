@@ -12,14 +12,17 @@
 ## END UNCOMMENT IF PAGE DON'T REDIRECT PROPERLY (PAGE NOT FOUND) ##
 
 ## UNCOMMENT TO ALLOW PLUGIN ACCESS TO admin-ajax.php ## 
-# Order allow,deny
-# Allow from all
-# Satisfy any
+#<Files admin-ajax.php>
+#    Order allow,deny
+#    Allow from all
+#    Satisfy any
+#</Files>
 ## END UNCOMMENT TO ALLOW PLUGIN ACCESS TO admin-ajax.php ## 
 
 # AuthType Basic 
-# AuthName "can u dig it" 
-# AuthUserFile "/home/.htpasswds/" ## Don't forget to  change your path ##
+# AuthName "can u dig it"
+## Don't forget to change your path ##
+# AuthUserFile "/home/.htpasswds/"
 # require valid-user 
 ## END PASSWORD PROTECT WP-ADMIN FOLDER ##
 
@@ -40,10 +43,13 @@ Options All -Indexes
 <FilesMatch "wp-login.php">
 AuthType Basic
 AuthName "can u dig it"
-AuthUserFile "/home/path/to/.htpasswds" ## Don't forget to  change your path ##
-require valid-user
+## Don't forget to  change your path to auth user file ##
+AuthUserFile "/home/path/to/.htpasswds" 
+## Use valid user or exact user name ##
+require valid-user 
+# require user myusername
 </FilesMatch>
-## END PASSWORD PROTECT wp-login.php##
+## END PASSWORD PROTECT wp-login.php ##
 
 ## PROTECT wp-config.php | BLOCK xmlrpc.php REQUESTS ##
 <FilesMatch "^(wp-config|xmlrpc)\.php$">
