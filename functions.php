@@ -1,6 +1,17 @@
 <?php
 
 //=============================================================================================
+// FUNCTION -> ADD SCRIPT FOR NO-JS JS CLASS
+//=============================================================================================
+
+function mytheme_html_js_class () {
+    echo '<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>'. "\n";
+}
+add_action( 'wp_head', 'mytheme_html_js_class', 1 );
+
+
+
+//=============================================================================================
 // FUNCTION -> ADD OPEN GRAPH META TAGS
 //=============================================================================================
 
