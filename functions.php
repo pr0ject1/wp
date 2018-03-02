@@ -5,12 +5,65 @@
 //=============================================================================================
 
 function mytheme_html_js_class () {
-    echo '<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>'. "\n";
+   echo '<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>'. "\n";
 }
 add_action( 'wp_head', 'mytheme_html_js_class', 1 );
+
 //=============================================================================================
 //Add no-js class to theme html tag (it will be replaced with js if javascript  working) <html class="no-js"></html>
 //CSS to fix theme when js is not active no-js .myclass { cssfix }
+//=============================================================================================
+
+
+
+//=============================================================================================
+// FUNCTION -> GET CUSTOM FIELD (POST META)
+//=============================================================================================
+
+function get_custom_field($field_name){
+   return get_post_meta(get_the_ID(),$field_name,true);
+}
+
+//=============================================================================================
+// to show it:
+// _e( get_custom_field('replace_with_custom_field_name'));
+//=============================================================================================
+
+
+
+
+//=============================================================================================
+// FUNCTION -> ADD FOOTER TEXT FIELD TO CUSTOMIZER OPTIONS
+//=============================================================================================
+
+function mytheme_customize_register( $wp_customize ) {
+	
+   $wp_customize->add_setting( 'mytheme_setting_id' , array(
+      'default'   => 'footer-text',
+      'transport' => 'refresh',
+      //'sanitize_callback' => 'wp_filter_nohtml_kses' //removes all HTML from content
+      'sanitize_callback' => 'wp_kses_post'	
+   ) );
+
+   $wp_customize->add_section( 'mytheme_section_id' , array(
+      'title'      => __( 'Footer text', 'textdomain' ),
+      'priority'   => 150,
+   ) );
+
+   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'footer_text', array(
+	'label'      => __( 'Footer Text', 'exportdrvo' ),
+	'type' => 'textarea',
+	'section'    => 'mytheme_section_id',
+	'settings'   => 'mytheme_setting_id',
+   ) ) );
+	
+}
+add_action( 'customize_register', 'mytheme_customize_register' );
+
+//=============================================================================================
+// to show it in your footer -> echo get_theme_mod( 'mytheme_setting_id' );
+//=============================================================================================
+
 
 
 //=============================================================================================
@@ -49,6 +102,9 @@ function meta_og() {
 	}
 }
 add_action('wp_head', 'meta_og', 5);
+
+//=============================================================================================
+
 
 
 //=============================================================================================
@@ -142,12 +198,7 @@ function wp_html_compression_start() {
 }
 add_action('get_header', 'wp_html_compression_start');
 
-
-
-
-
-
-
+//=============================================================================================
 
 
 
@@ -311,6 +362,7 @@ class WPDocs_Custom_Meta_Box {
 }
  
 new WPDocs_Custom_Meta_Box();
+//=============================================================================================
 // to show outside of loop
 // get_post_meta( int $post_id, string $key = '', bool $single = false )
 
@@ -331,5 +383,6 @@ new WPDocs_Custom_Meta_Box();
 // while ($the_query -> have_posts()) : $the_query -> the_post();
 //  do your stuff
 // endwhile; wp_reset_postdata();    
+//=============================================================================================
 
 ?>
