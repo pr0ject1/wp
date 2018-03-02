@@ -8,7 +8,9 @@ function mytheme_html_js_class () {
     echo '<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>'. "\n";
 }
 add_action( 'wp_head', 'mytheme_html_js_class', 1 );
-
+//=============================================================================================
+//Add no-js class to theme html tag (it will be replaced with js if javascript  working) <html class="no-js"></html>
+//CSS to fix theme when js is not active no-js .myclass { cssfix }
 
 
 //=============================================================================================
