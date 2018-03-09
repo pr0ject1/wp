@@ -39,6 +39,18 @@ Allow from 213.202.69.0/24
 
 
 
+
+## ## /public_html/wp-content/uploads/.htaccess ## ##
+
+## DISABLE PHP EXECUTION ##
+<Files ~ "\.ph(?:p[345]?|t|tml)$">
+   deny from all
+</Files>
+## END DISABLE PHP EXECUTION ##
+
+
+
+
 ## ## /public_html/.htaccess ## ##
 
 
@@ -88,6 +100,21 @@ RewriteCond %{HTTP_USER_AGENT} ^$
 RewriteRule (.*) http://%{REMOTE_ADDR}/$1 [R=301,L]
 </ifModule>
 ## END Deny Access to No Referrer Requests - Stop spam attack logins and comments ##
+
+## BLOCK THE INCLUDE ONLY FILES ##
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^wp-admin/includes/ - [F,L]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+## END BLOCK THE INCLUDE ONLY FILES ##
+
+
+
 
 
 ## EXPIRES CACHING ##
